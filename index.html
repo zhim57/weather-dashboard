@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href=" assets/css/style.css" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
   <title>Weather Dashboard</title>
@@ -29,16 +29,16 @@
     <form id="city-form">
       <label for="city-input">Search for a City </label>
       <input type="text" id="city-input">
-      <!-- <br> -->
+      
 
-      <!-- Button triggers new movie to be added -->
+      <!-- Button triggers new city to be added -->
       <input id="add-city" type="submit" value="Add a City">
     </form>
 
-    <!-- Movies will Get Dumped Here -->
+   
     <div class="row">
       <div class="col-m-4"> 
-        <div class="city no-show">Press a city button!</div>
+        <div class="city no-show"> </div>
         
         <div class="row">
           <div class="col-m-4" id="buttons-view">
@@ -52,7 +52,7 @@
             <div class="humidity"></div>
             <div class="temp"></div>
         
-            <!-- Add extra div for the bonus Fahrenheit temp -->
+            
             <div class="tempF"></div>
             <div class="uvHolder"><Span>UV Index: </Span><Span id="uv"></Span></div>
           </div>
@@ -81,8 +81,6 @@
 
 
 
-    <!-- weather map -->
-    <!-- Retrieved data will be dumped here -->
   </div>
 
 
