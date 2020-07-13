@@ -1,0 +1,148 @@
+.container
+{
+   margin-left: 10%;
+   margin-right: 10%;
+   padding: 0;
+}
+.cities-view{
+   padding-top: 5%;
+   padding-left: 8% ;
+   background: lightskyblue;
+   font-size: 20px;
+   font-weight: 700;
+   height: 71px ;
+   max-width: 450px;
+   margin-bottom: 3%;
+}
+.imgD{
+   background: lightskyblue;
+   height: 71px ;
+   max-width: 120px;
+}
+.city-btn{
+   background-color: lightskyblue;
+   margin-left: 12%  ;
+   margin-bottom: 10px;
+   width: 120px;
+   padding: 5px;
+   list-style-type: none;
+   border-radius: 5px;
+   text-align: center;
+}
+
+.city-btn:hover{
+   background: darkcyan;
+   cursor: pointer;
+}
+.citiesUL{
+   margin: 5px;
+}
+#add-city
+{
+   width: 80px;
+   height: 35px;
+   margin-left: 1%;
+   background: lightskyblue;
+   font-size: 14px;
+   font-weight: 600;
+   border: 0px;
+   border-radius: 10px;
+   
+ }
+.current-view{
+   margin-top: 0.5%;
+   line-height: 2.2;
+   margin-left: 8% ;
+   background: rgb(214, 218, 223);
+   font-size: 14px;
+   width: 220px;
+   height:208px;
+   padding:10px;
+}
+header
+{
+   text-align: center;
+   color: #fbfdfe;
+   background-color: #343a40;
+   font-size: 36px;
+   line-height: 30px;
+   padding: 5% 20%;
+   margin-bottom: 0;
+   
+}
+.no-show{
+   display:none;
+}
+
+.uvSafe{
+   background-color: springgreen;
+   color:white;
+}
+.uvModerate{
+   background-color: yellow;
+   color: navy;
+}
+.uvSevere
+{
+   background-color:orangered;
+   color:white;
+}
+.uvSevere1{
+   background-color: red;
+   color:white;
+}
+.uvInsane{
+   background-color:purple;
+   color:white;
+}
+#uv{
+   padding:9px;
+   border-radius: 5px;
+  
+}
+#city-form{
+   margin:20px 20px; 
+}
+/* .close {
+   cursor: pointer;
+   font-size: 16px;
+   /* position: absolute; */
+   /* top: 50%;
+   right: 0%; */
+   /* padding: 6px 6px;
+   color: white;
+   transform: translate(0%, -50%); */ 
+
+/* }
+
+.close:hover {
+   background: salmon ;
+   border-radius: 20px;
+} */
+.prognosis{
+   margin-right:1%;
+   background-color: lightskyblue;
+   font-size: 14px;
+   max-width: 200px;
+   
+   line-height: 1.4;
+}
+.prognosis p{
+   text-align: center;
+   margin: 0;
+   /* font-size: 14px; */
+}
+.prognosis img{
+  max-height: 80px;
+  max-width: 90px;
+  margin: 0;
+   /* font-size: 14px; */
+}
+
+@media (min-width: 576px)
+{
+   header
+   {
+      padding: 3%;
+   }
+}
