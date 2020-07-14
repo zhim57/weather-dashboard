@@ -40,6 +40,8 @@ $(document).ready(function () {
             var cityName = response.city.name;
             lat = response.city.coord.lat;
             lon = response.city.coord.lon;
+            console.log("lat  "+lat);
+            console.log("lon  "+lon);
 
             var humidityD = response.list[3].main.humidity;
             var windSpeedDm = response.list[3].wind.speed;
