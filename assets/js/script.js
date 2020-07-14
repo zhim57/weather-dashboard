@@ -88,7 +88,7 @@ $(document).ready(function () {
         //added the check Boolean change to guarantee the forecast cards are displayed once only
 
         cardsFull = true;
-        $("li." + cities[cities.length - 1]).trigger('click');
+        $("li." + cities[cities.length-1 ]).trigger('click');
 
     }
 
@@ -235,7 +235,7 @@ $(document).ready(function () {
         }
         // creating a manual click event to display last shown city on start 
         cardsFull = true;
-        $("li." + cities[cities.length-1]).trigger('click');
+        $("li." + cities[0]).trigger('click');
     }
     // creating a call for the fill up function above
     fillArreyOnStart();
