@@ -11,7 +11,7 @@ SO THAT I can plan a trip accordingly
 
 ## Acceptance Criteria
 
-```
+
 GIVEN a weather dashboard with form inputs
 WHEN I search for a city
 THEN I am presented with current and future conditions for that city and that city is added to the search history
@@ -36,5 +36,6 @@ created elements to hold the info and appended them to the web site elements
 created some formulas to convert temperature,
 speed and time as needed
 put a "document ready function around the whole package to guarantee the document will load fully before the javascript starts executing
-[link to this portfolio](https://github.com/zhim57/weather-dashboard),[link to the deployed application](https://zhim57.github.io/weather-dashboard/)
-![screenshot working application](/weather_dashboard.JPG)
+[link to this portfolio](https://github.com/zhim57/weather-dashboard)
+[link to the deployed application](https://zhim57.github.io/weather-dashboard)
+![screenshot working application](weather_dashboard.JPG)
