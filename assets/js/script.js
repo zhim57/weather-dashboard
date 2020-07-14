@@ -1,7 +1,7 @@
 // function to force js to wait till the whole document loads
 $(document).ready(function () {
 
-   // setting up some global variables
+    // setting up some global variables
     var cities = [];
     var lat = "";
     var lon = "";
@@ -32,7 +32,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-        // preparing the div that will hold the city and date displayed
+            // preparing the div that will hold the city and date displayed
             cityDiv = $(".city");
             cityDiv.removeClass("no-show");
             cityDiv.addClass("cities-view");
@@ -40,8 +40,8 @@ $(document).ready(function () {
             var cityName = response.city.name;
             lat = response.city.coord.lat;
             lon = response.city.coord.lon;
-            console.log("lat  "+lat);
-            console.log("lon  "+lon);
+            console.log("lat  " + lat);
+            console.log("lon  " + lon);
 
             var humidityD = response.list[3].main.humidity;
             var windSpeedDm = response.list[3].wind.speed;
@@ -69,20 +69,22 @@ $(document).ready(function () {
         });
     }
 
-// funcrtion to create the buttons from the array or local storage
+    // funcrtion to create the buttons from the array or local storage
     function renderButtons() {
         $("#buttons-view").empty();
         // Looping through the array of cities
         for (var i = 0; i < 5; i++) {
             var a = $("<li>");
             a.addClass("city-btn");
+            a.addClass(cities[cities.length - 1 - i]);
+
             // Adding a data-attribute
             a.attr("data-name", cities[cities.length - 1 - i]);
             // Providing the initial button text
             a.text(cities[cities.length - 1 - i]);
             // Adding the button to the buttons-view div
             $("#buttons-view").append(a);
-              // console.log(a);
+            // console.log(a);
         }
     }
 
@@ -105,10 +107,11 @@ $(document).ready(function () {
     // Adding a click event listener to all elements with a class of "movie-btn"
     $(document).on("click", ".city-btn", displayCityInfo);
 
+    var datesArrey = ["day0", ".day1", ".day2", ".day3", ".day4", ".day5"];
     function displayUv() {
 
         var APIKey = "f2e73a675d880326530db1f8aee7437b";
-            // puting together the queryURL for the second AJAX call
+        // puting together the queryURL for the second AJAX call
         var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=" + APIKey;
         // console.log(queryURL);
         // Creating an AJAX call for the specific city button being clicked by Lat and Lon
@@ -124,7 +127,7 @@ $(document).ready(function () {
             var tempF = (tempD - 273.15) * 1.80 + 32;
             // Convert the temp K  to Celsius
             var tempC = tempD - 273.15;
-             
+
             // clearing the previous and assigning current classes for the diferent values of UV Index
             if (uvD < 3) {
                 $("#uv").removeClass();
@@ -149,89 +152,78 @@ $(document).ready(function () {
             else {
 
             }
-            
+
             // trimming the temp values to one digit after the decimal point and assigning to the appr div
             $(".tempF").text("Temperature (F) " + tempF.toFixed(1));
             //adding the C temp
-           var pOne = $("<p>").text("Temperature (C): " + tempC.toFixed(1));
+            var pOne = $("<p>").text("Temperature (C): " + tempC.toFixed(1));
             $(".tempF").append(pOne);
             // displayng the UV value
             $("#uv").text(uvD);
-            // calling the function for creating the 5 day forecast
             createForecast();
-        });
-    }
 
-    // create 5 date forecast starting array
-    var datesArrey = ["day0", ".day1", ".day2", ".day3", ".day4", ".day5"];
-    //function for creating the 5 day forecast
-    function createForecast() {
-        //ajax call #3
-        var APIKey = "f2e73a675d880326530db1f8aee7437b";
-        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=" + APIKey;
-        // console.log(queryURL);
-        // Creating an AJAX call for the forecast data
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response);
-            //getting the values and filling the cards
+            function createForecast() {
+                // module cards starts
+                for (var i = 1; i < 6; i++) {
+                    var date1 = $("<p>");
+                    var dateDU1 = response.daily[i].dt;
+                    var dateD1 = new Date();
+                    dateD1.setTime(dateDU1 * 1000);
+                    console.log(dateD1);
 
-            for (var i = 1; i < 6; i++) {
-                var date1 = $("<p>");
-                var dateDU1 = response.daily[i].dt;
-                var dateD1 = new Date();
-                dateD1.setTime(dateDU1 * 1000);
-                console.log(dateD1);
+                    var month = dateD1.getMonth();
+                    var day = dateD1.getDate();
+                    var year = dateD1.getFullYear();
+                    var dateDD = (month + 1) + "/" + day + "/" + year;
+                    console.log(dateDD);
 
-                var month = dateD1.getMonth();
-                var day = dateD1.getDate();
-                var year = dateD1.getFullYear();
-                var dateDD = (month + 1) + "/" + day + "/" + year;
-                console.log(dateDD);
+                    date1.text(dateDD);
+                    $(datesArrey[i]).append(date1);
+                    $(datesArrey[i]).removeClass("no-show");
 
-                date1.text(dateDD);
-                $(datesArrey[i]).append(date1);
-                $(datesArrey[i]).removeClass("no-show");
+                    var weatherIcon = response.daily[i].weather[0].icon;
 
-                var weatherIcon = response.daily[i].weather[0].icon;
+                    var imgURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+                    console.log(imgURL);
 
-                var imgURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-                console.log(imgURL);
+                    // // Creating an element to hold the image
+                    var imageDp = $("<img>");
 
-                // // Creating an element to hold the image
-                var imageDp = $("<img>");
+                    imageDp.attr("src", imgURL);
+                    imageDp.attr("alt", "weather icon");
+                    // appending to the card
+                    $(datesArrey[i]).append(imageDp);
 
-                imageDp.attr("src", imgURL);
-                imageDp.attr("alt", "weather icon");
-                // appending to the card
-                $(datesArrey[i]).append(imageDp);
+                    // creating values for humidity and temp
+                    var humidityD = response.daily[i].humidity;
+                    var tempK = response.daily[i].temp.day;
+                    var tempF = (tempK - 273.15) * 1.80 + 32;
+                    var pTwo = $("<p>").text("Humidity: " + humidityD + " % ");
+                    var pThree = $("<p>").text("Temp: " + tempF.toFixed(1) + " F");
+                    // appending to the card
+                    $(datesArrey[i]).append(pTwo);
+                    $(datesArrey[i]).append(pThree);
+                    // setting the check var to true to avoid creating more than one set of weather cards for the prognosis
+                    cardsFull = true;
 
-                // creating values for humidity and temp
-                var humidityD = response.daily[i].humidity;
-                var tempK = response.daily[i].temp.day;
-                var tempF = (tempK - 273.15) * 1.80 + 32;
-                var pTwo = $("<p>").text("Humidity: " + humidityD + " % ");
-                var pThree = $("<p>").text("Temp: " + tempF.toFixed(1) + " F");
-                // appending to the card
-                $(datesArrey[i]).append(pTwo);
-                $(datesArrey[i]).append(pThree);
-                // setting the check var to true to avoid creating more than one set of weather cards for the prognosis
-                cardsFull = true;
+                    // module cards ends
+
+                }
 
             }
         });
-
     }
 
-// module for filling the cities array from local storage on startup
+
+    // module for filling the cities array from local storage on startup
     function fillArreyOnStart() {
         for (var i = 0; i < 5; i++) {
             var cityS = localStorage.getItem(i);
             cities.push(cityS);
             renderButtons();
         }
+        // creating a manual click event to display last shown city on start 
+        $("li." + cities[4]).trigger('click');
     }
     // creating a call for the fill up function above
     fillArreyOnStart();
