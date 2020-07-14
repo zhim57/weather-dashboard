@@ -6,27 +6,28 @@ $(document).ready(function () {
     var lat = "";
     var lon = "";
     var cityDiv;
-    var cardsFull;
+    var cardsFull = true;
 
 
     function displayCityInfo() {
-        // clearing the display divs for the 5 day forecast cards
-        // console.log(cardsFull)
-        if (cardsFull === true) {
-            for (var i = 1; i < 6; i++) {
-                $(datesArrey[i]).empty();
-                console.log(datesArrey[i]);
-                cardsFull = false;
-            }
-        }
-        else {
-            // console.log("hello");
-        }
+        // //---------------
+        // // clearing the display divs for the 5 day forecast cards
+        // if (cardsFull === true) {
+        //     for (var i = 1; i < 6; i++) {
+        //         $(datesArrey[i]).empty();
+        //         // setting the check boolean to "false" after emtying the card divs
+        //         cardsFull = false;
+        //     }
+        // }
+        // else {
+
+        // }
+        // //-----------------
         // preparing variables for the first AXAx request
         var city = $(this).attr("data-name");
         var APIKey = "f2e73a675d880326530db1f8aee7437b";
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
-        // console.log(queryURL);
+
         // Creating an AJAX call for the specific city button being clicked
         $.ajax({
             url: queryURL,
@@ -40,8 +41,6 @@ $(document).ready(function () {
             var cityName = response.city.name;
             lat = response.city.coord.lat;
             lon = response.city.coord.lon;
-            console.log("lat  " + lat);
-            console.log("lon  " + lon);
 
             var humidityD = response.list[3].main.humidity;
             var windSpeedDm = response.list[3].wind.speed;
@@ -53,10 +52,10 @@ $(document).ready(function () {
             $(".humidity").text("Humidity: " + humidityD + " %");
 
             $("#cities-view").prepend(cityDiv);
-            // console.log(response.list[3]);
+
             var weatherIcon = response.list[2].weather[0].icon;
             var imgURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-            // console.log(imgURL);
+
 
             // // Creating an element to hold the image
             var imageD = $(".imgD");
@@ -84,8 +83,13 @@ $(document).ready(function () {
             a.text(cities[cities.length - 1 - i]);
             // Adding the button to the buttons-view div
             $("#buttons-view").append(a);
-            // console.log(a);
         }
+        // added a trigger to populate data on initial  input of the city 
+        //added the check Boolean change to guarantee the forecast cards are displayed once only
+
+        cardsFull = true;
+        $("li." + cities[cities.length - 1]).trigger('click');
+
     }
 
     // This function handles events where a city button is clicked
@@ -96,6 +100,7 @@ $(document).ready(function () {
         // Adding the city from the textbox to the cities array
         cities.push(city);
         // recording the last 5 cities used inthe array to the local storrage
+
         for (var i = 0; i < 5; i++) {
             localStorage.setItem(i, cities[cities.length - i - 1]);
         }
@@ -104,7 +109,7 @@ $(document).ready(function () {
 
     });
 
-    // Adding a click event listener to all elements with a class of "movie-btn"
+    // Adding a click event listener to all elements with a class of "city-btn"
     $(document).on("click", ".city-btn", displayCityInfo);
 
     var datesArrey = ["day0", ".day1", ".day2", ".day3", ".day4", ".day5"];
@@ -113,7 +118,7 @@ $(document).ready(function () {
         var APIKey = "f2e73a675d880326530db1f8aee7437b";
         // puting together the queryURL for the second AJAX call
         var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=" + APIKey;
-        // console.log(queryURL);
+
         // Creating an AJAX call for the specific city button being clicked by Lat and Lon
         $.ajax({
             url: queryURL,
@@ -163,19 +168,28 @@ $(document).ready(function () {
             createForecast();
 
             function createForecast() {
+                // clearing the display divs for the 5 day forecast cards
+                if (cardsFull === true) {
+                    for (var i = 1; i < 6; i++) {
+                        $(datesArrey[i]).empty();
+                        // setting the check boolean to "false" after emtying the card divs
+                        cardsFull = false;
+                    }
+                }
+                else {
+
+                }
                 // module cards starts
                 for (var i = 1; i < 6; i++) {
                     var date1 = $("<p>");
                     var dateDU1 = response.daily[i].dt;
                     var dateD1 = new Date();
                     dateD1.setTime(dateDU1 * 1000);
-                    console.log(dateD1);
 
                     var month = dateD1.getMonth();
                     var day = dateD1.getDate();
                     var year = dateD1.getFullYear();
                     var dateDD = (month + 1) + "/" + day + "/" + year;
-                    console.log(dateDD);
 
                     date1.text(dateDD);
                     $(datesArrey[i]).append(date1);
@@ -184,7 +198,6 @@ $(document).ready(function () {
                     var weatherIcon = response.daily[i].weather[0].icon;
 
                     var imgURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-                    console.log(imgURL);
 
                     // // Creating an element to hold the image
                     var imageDp = $("<img>");
@@ -204,16 +217,14 @@ $(document).ready(function () {
                     $(datesArrey[i]).append(pTwo);
                     $(datesArrey[i]).append(pThree);
                     // setting the check var to true to avoid creating more than one set of weather cards for the prognosis
-                    cardsFull = true;
-
-                    // module cards ends
+                    // module for cards ends here
 
                 }
+                cardsFull = true;
 
             }
         });
     }
-
 
     // module for filling the cities array from local storage on startup
     function fillArreyOnStart() {
@@ -223,7 +234,8 @@ $(document).ready(function () {
             renderButtons();
         }
         // creating a manual click event to display last shown city on start 
-        $("li." + cities[4]).trigger('click');
+        cardsFull = true;
+        $("li." + cities[cities.length-1]).trigger('click');
     }
     // creating a call for the fill up function above
     fillArreyOnStart();
