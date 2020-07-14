@@ -40,7 +40,7 @@ created some formulas to convert temperature,
 speed and time as needed
 put a "document ready function around the whole package to guarantee the document will load fully before the javascript starts executing
 
-{link to this portfolio](https://github.com/zhim57/weather-dashboard)
-{link to the deployed application](https://zhim57.github.io/weather-dashboard/)
+!{link to this portfolio](https://github.com/zhim57/weather-dashboard)
+!{link to the deployed application](https://zhim57.github.io/weather-dashboard/)
 
 ![screenshot working application](weather_dashboard.JPG)
