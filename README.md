@@ -25,8 +25,7 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 WHEN I open the weather dashboard
 THEN I am presented with the last searched city forecast
-
-
+---
 created a basic interface with divs to attach the information
 set appropriate classes
 prepared in the js file the global variables and added the info for the AJAx call
@@ -37,8 +36,5 @@ created elements to hold the info and appended them to the web site elements
 created some formulas to convert temperature,
 speed and time as needed
 put a "document ready function around the whole package to guarantee the document will load fully before the javascript starts executing
-
-[link to this portfolio](https://github.com/zhim57/weather-dashboard)
-[link to the deployed application](https://zhim57.github.io/weather-dashboard/)
-
+[link to this portfolio](https://github.com/zhim57/weather-dashboard),[link to the deployed application](https://zhim57.github.io/weather-dashboard/)
 ![screenshot working application](/weather_dashboard.JPG)
